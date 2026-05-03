@@ -1,0 +1,190 @@
+@import "tailwindcss";
+
+:root {
+  /* Neutral clinical base — near-black with cool undertones */
+  --neutral-950: #08090a;
+  --neutral-900: #0e1011;
+  --neutral-850: #131517;
+  --neutral-800: #1a1c1f;
+  --neutral-700: #26292d;
+  --neutral-600: #3a3e44;
+  --neutral-500: #555a62;
+  --neutral-400: #787f8a;
+  --neutral-300: #a0a7b2;
+  --neutral-200: #c8cdd5;
+  --neutral-100: #e4e7ec;
+  --neutral-50: #f4f5f7;
+
+  /* Clinical accent — a refined teal that reads "science" */
+  --accent-500: #00c9a7;
+  --accent-400: #2ee8c6;
+  --accent-300: #7df3dc;
+  --accent-200: #b8f9ee;
+  --accent-600: #00a88c;
+  --accent-700: #008a73;
+  --accent-900: #003d33;
+
+  /* Subtle cool-blue for secondary highlights */
+  --steel-500: #5b8def;
+  --steel-400: #7ea8ff;
+  --steel-300: #a8c4ff;
+
+  --background: #08090a;
+  --foreground: #e4e7ec;
+  --muted: #131517;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-neutral-950: var(--neutral-950);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-850: var(--neutral-850);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-50: var(--neutral-50);
+
+  --color-accent-200: var(--accent-200);
+  --color-accent-300: var(--accent-300);
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+  --color-accent-700: var(--accent-700);
+  --color-accent-900: var(--accent-900);
+
+  --color-steel-300: var(--steel-300);
+  --color-steel-400: var(--steel-400);
+  --color-steel-500: var(--steel-500);
+
+  --color-muted: var(--muted);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-bodoni-moda);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background: var(--accent-500);
+  color: #000;
+}
+
+/* ── Animations ──────────────────────────────────── */
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-slow {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-fade-in-delay {
+  animation: fade-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  opacity: 0;
+}
+.animate-fade-in-delay-2 {
+  animation: fade-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  opacity: 0;
+}
+.animate-fade-in-delay-3 {
+  animation: fade-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+  opacity: 0;
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* ── Utility classes ─────────────────────────────── */
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-400), var(--accent-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--accent-500),
+    var(--accent-300),
+    var(--accent-500)
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+.glass {
+  background: rgba(8, 9, 10, 0.8);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+}
+
+.glass-card {
+  background: var(--neutral-850);
+  border: 1px solid var(--neutral-700);
+}
+
+.divider {
+  border-color: var(--neutral-800);
+}
+
+.accent-glow {
+  box-shadow: 0 0 30px rgba(0, 201, 167, 0.08), 0 0 80px rgba(0, 201, 167, 0.04);
+}
+
+.hero-bg {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0, 201, 167, 0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(91, 141, 239, 0.04) 0%, transparent 45%),
+    var(--background);
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

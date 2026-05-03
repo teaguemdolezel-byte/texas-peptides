@@ -68,7 +68,7 @@ async function handleIpn(req: NextRequest) {
   // Sanity check — amount from paygate should at least cover the order
   // total. paygate.to converts to USD so this should be a clean match.
   const expectedUsd = order.totalCents / 100;
-  const reportedUsd = ipn.amountReceived ?? ipn.amount ?? 0;
+  const reportedUsd = ipn.amountReceived ?? 0;
   if (reportedUsd > 0 && reportedUsd + 0.01 < expectedUsd) {
     console.warn(
       `[paygate-webhook] amount underpaid: expected ${expectedUsd}, got ${reportedUsd}`
