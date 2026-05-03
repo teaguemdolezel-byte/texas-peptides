@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg: #0b0b0c;
+  --bone: #f1eee6;
+  --accent: #00a88c;
+  --accent-deep: #003d33;
+  /* Legacy alias — every old --ox reference still works, just teal now. */
+  --ox: #00a88c;
+}
+
+html, body {
+  background-color: var(--bg);
+  color: var(--bone);
+}
+
+body {
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─────────── Hero glow ─────────── */
+.glow-ox,
+.glow-accent {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 60% at 30% 0%, rgba(0, 168, 140, 0.20), transparent 70%),
+    radial-gradient(40% 40% at 80% 100%, rgba(184, 249, 238, 0.06), transparent 70%);
+}
+
+/* Subtle scanline / metal texture */
+.metal {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.06) 0px,
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+}
+
+/* Film grain (very subtle, masculine) */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.10 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+/* Marquee */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 3rem;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  flex-shrink: 0;
+  animation: marquee 38s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─────────── Buttons ─────────── */
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-none border border-bone bg-bone px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-bg transition hover:bg-transparent hover:text-bone active:scale-[0.98];
+}
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-none border border-ash-600 bg-transparent px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-bone transition hover:border-bone hover:bg-bone/5;
+}
+.btn-ox {
+  @apply inline-flex items-center justify-center rounded-none border border-ox-500 bg-ox-500 px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-bone transition hover:bg-ox-600 hover:border-ox-600 active:scale-[0.98];
+}
+
+.kicker {
+  @apply text-[10px] uppercase tracking-[0.24em] text-bone-300;
+}
+
+.eyebrow-line::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  margin-right: 12px;
+  vertical-align: middle;
+  opacity: 0.5;
+}
+
+.hairline {
+  border-color: rgba(241, 238, 230, 0.08);
+}
+
+/* Section dividers */
+.divider-y {
+  border-top: 1px solid rgba(241, 238, 230, 0.08);
+  border-bottom: 1px solid rgba(241, 238, 230, 0.08);
+}
+
+/* Magnetic */
+.magnet {
+  transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.magnet:hover {
+  transform: translateY(-2px);
+}
+
+/* Pulsing dot */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.5); }
+}
+.pulse-dot {
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
